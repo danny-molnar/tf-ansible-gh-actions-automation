@@ -38,9 +38,9 @@ jobs:
         run: 
           terraform output ec2_instance_ip >> $PUBLIC_IP
 
-      - name: Test GHAc var
-        run:
-          echo $PUBLIC_IP
+      # - name: Test GHAc var
+      #   run:
+      #     echo $PUBLIC_IP
 
       # - name: PWD
       #   run:
