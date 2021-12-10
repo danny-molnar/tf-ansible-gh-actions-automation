@@ -1,0 +1,50 @@
+---
+- hosts: webserver
+  become: yes
+  vars:
+    document_root: /var/www
+    app_root: html_demo_site-main
+    server_name: "3.250.162.241"
+  tasks:
+    - name: Enabling nginx1 package in Amazon Linux Extras
+      shell: "amazon-linux-extras enable nginx1"
+
+    - name: Installing nginx
+      yum: 
+        name: nginx
+        state: latest
+        
+    - name: Copy website files to the server's document root
+      copy:
+        src: "{{ app_root }}"
+        dest: "{{ document_root }}"
+        mode: preserve
+
+    - name: Creating folder sites-available
+      file:
+        path: "/etc/nginx/sites-available"
+        state: directory
+
+    - name: Creating folder sites-enabled
+      file:
+        path: "/etc/nginx/sites-enabled"
+        state: directory
+
+    - name: Apply Nginx template
+      template:
+        src: files/nginx.conf.j2
+        dest: /etc/nginx/sites-available/default
+      notify: Restart Nginx
+
+    - name: Enable new site
+      file:
+        src: /etc/nginx/sites-available/default
+        dest: /etc/nginx/sites-enabled/default
+        state: link
+      notify: Restart Nginx
+
+  handlers:
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted
