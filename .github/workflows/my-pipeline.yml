@@ -1,13 +1,14 @@
-name: Talent Academy Demo
-on: [ push ]    # List on one line
+name: TA Exercise - Terraform / Ansible automation 
+on: [ push ]    
 jobs:
+  # This first job is there to deploy the infrastructure with Terraform
   terraform-deployment:
     runs-on: ubuntu-latest
-    steps: # The list of steps to take for execution
+    steps: 
       - name: Authenticating with AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }} # hoping this will work now
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }} 
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-west-1
 
@@ -30,3 +31,6 @@ jobs:
         id: apply
         run: terraform apply -auto-approve
         continue-on-error: true
+
+  # This second job is the ansible job to deploy the website on the server
+  
