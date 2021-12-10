@@ -34,13 +34,11 @@ jobs:
         run: terraform apply -auto-approve
         continue-on-error: true
 
-      - name: Saving terraform output into a variable
+      - name: Echo tf output
         run: 
-          output-var=$(terraform output ec2_instance_ip)
+          terraform output ec2_instance_ip
 
-      - name: Testing output variable
-        run:
-          echo $output-var
+
 
         
 
