@@ -34,13 +34,13 @@ jobs:
         run: terraform apply -auto-approve
         continue-on-error: true
 
-      - name: Echo tf output
+      - name: Saving tf output
         run: 
-          terraform output ec2_instance_ip >> "$PUBLIC_IP"
+          terraform output ec2_instance_ip >> new_public_ip_address
 
-      # - name: Test GHAc var
-      #   run:
-      #     echo $PUBLIC_IP
+      - name: Catting ip addr file
+        run:
+          cat new_public_ip_address
 
       # - name: PWD
       #   run:
