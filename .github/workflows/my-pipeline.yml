@@ -38,10 +38,19 @@ jobs:
         run: 
           terraform output ec2_instance_ip
 
-      - name: PWD
-        run:
-          ls -la
+      # - name: PWD
+      #   run:
+      #     ls -la
 
+      # Now the task is to somehow add the terraform output var (the public IP of the instance) to the corresponding files
+      # and afterwards carry on with the ansible task
 
+  instance-ip-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo tf output
+        run: 
+          terraform output ec2_instance_ip
+          
   # This second job is the ansible job to deploy the website on the server
   
