@@ -38,9 +38,10 @@ jobs:
         run: 
           terraform output ec2_instance_ip
 
+      - name: PWD
+        run:
+          pwd
 
-
-        
 
   # This second job is the ansible job to deploy the website on the server
   
