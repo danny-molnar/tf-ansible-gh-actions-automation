@@ -36,9 +36,7 @@ jobs:
 
       - name: Echo tf output
         run: 
-          terraform output ec2_instance_ip
-        env:
-          PUBLIC_IP: ${{ ec2_instance_ip }}
+          terraform output ec2_instance_ip >> $PUBLIC_IP
 
       - name: Test GHAc var
         run:
