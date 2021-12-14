@@ -40,7 +40,7 @@ jobs:
 
       - name: Catting ip addr file
         run:
-          new_ip = `cat new_public_ip_address`
+          new_ip=`cat new_public_ip_address`
 
       # Since the file now contains the IP we can invoke the following command to get the address without quotes:
       # sed 's/^"//;s/.$//' new_public_ip_address
