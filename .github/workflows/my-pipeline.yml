@@ -59,7 +59,7 @@ jobs:
 
       - name: Populating files with new ip
         run:
-          sed -i 's/ip_address_goes_here/$new_ip' inventory.hosts
+          sed -i 's/ip_address_goes_here/$new_ip/g' inventory.hosts
 
       - name: Testing if it worked, hope it did
         run:
