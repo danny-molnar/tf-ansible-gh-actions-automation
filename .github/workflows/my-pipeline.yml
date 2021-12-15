@@ -49,7 +49,6 @@ jobs:
       - name: Echoing IP var
         run: echo $new_ip
 
-
       # Since the file now contains the IP we can invoke the following command to get the address without quotes:
       # sed 's/^"//;s/.$//' new_public_ip_address
       # This will "echo" the IP which we can copy into the config files for ansible
@@ -66,4 +65,6 @@ jobs:
         run:
           cat inventory.hosts
 
+     # Okay, so the part after this should be easy, replicating the tasks in the eralier repo, where we deploy the website using ansible
+     # I just need to figure out how to save the pulic IP address and add it tothe config files. 
   
