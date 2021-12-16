@@ -44,7 +44,7 @@ jobs:
 
       - name: Updating inventory.hosts with new ip
         run:
-          addr=`cat new_public_ip_address` && sed "s/ip_address_goes_here/$addr/" ../../inventory.hosts > temp && mv temp inventory.hosts
+          addr=`cat new_public_ip_address` && sed "s/ip_address_goes_here/$addr/" inventory.hosts > temp && mv temp inventory.hosts
 
 
       # Since the file now contains the IP we can invoke the following command to get the address without quotes:
