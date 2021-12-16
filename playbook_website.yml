@@ -4,7 +4,7 @@
   vars:
     document_root: /var/www
     app_root: html_demo_site-main
-    server_name: "ip_address_goes_here"
+    server_name: ip_address_goes_here
   tasks:
     - name: Enabling nginx1 package in Amazon Linux Extras
       shell: "amazon-linux-extras enable nginx1"
