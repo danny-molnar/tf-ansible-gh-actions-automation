@@ -46,13 +46,8 @@ jobs:
         run:
           addr=`cat new_public_ip_address` && sed "s/ip_address_goes_here/$addr/" playbook_website.yml > temp && mv temp playbook_website.yml
 
-      - name: Testing if it worked, hope it did
-        run:
-          cat inventory.hosts
-
-      - name: Testing if it worked, hope it did
-        run:
-          cat playbook_website.yml
-
       # Below needs to be the steps for creating the website with ansible, as seen in the otheer repo
-  
+
+      - name: Running ansible
+        run:
+          ansible-playbook playbook_website.yml
