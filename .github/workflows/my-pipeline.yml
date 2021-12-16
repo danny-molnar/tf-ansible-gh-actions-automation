@@ -57,13 +57,13 @@ jobs:
       # inventory.hosts - 2nd line, IP addr without quotes
       # playbook_website.yml - 7th line, after the colon, IP addr with quotes
 
-      - name: Populating files with new ip
-        run:
-          sed -i 's/ip_address_goes_here/`echo $new_ip`/g' inventory.hosts
+      # - name: Populating files with new ip
+      #   run:
+      #     sed -i 's/ip_address_goes_here/`echo $new_ip`/g' inventory.hosts
 
-      - name: Testing if it worked, hope it did
-        run:
-          cat inventory.hosts
+      # - name: Testing if it worked, hope it did
+      #   run:
+      #     cat inventory.hosts
 
      # Okay, so the part after this should be easy, replicating the tasks in the eralier repo, where we deploy the website using ansible
      # I just need to figure out how to save the pulic IP address and add it tothe config files. 
