@@ -38,31 +38,21 @@ jobs:
         run: 
           terraform output ec2_instance_ip >> new_public_ip_address
 
-      # - name: Catting ip addr file
-      #   run:
-      #     cat new_public_ip_address
-
       - name: Updating inventory.hosts with new ip
         run:
           addr=`cat new_public_ip_address` && sed "s/ip_address_goes_here/$addr/" inventory.hosts > temp && mv temp inventory.hosts
 
-
-      # Since the file now contains the IP we can invoke the following command to get the address without quotes:
-      # sed 's/^"//;s/.$//' new_public_ip_address
-      # This will "echo" the IP which we can copy into the config files for ansible
-
-      # Files need updating:
-      # inventory.hosts - 2nd line, IP addr without quotes
-      # playbook_website.yml - 7th line, after the colon, IP addr with quotes
-
-      # - name: Populating files with new ip
-      #   run:
-      #     sed -i 's/ip_address_goes_here/`echo $new_ip`/g' inventory.hosts
+      - name: Updating playbook_website with new ip
+        run:
+          addr=`cat new_public_ip_address` && sed "s/ip_address_goes_here/$addr/" playbook_website.yml > temp && mv temp playbook_website.yml
 
       - name: Testing if it worked, hope it did
         run:
           cat inventory.hosts
 
-     # Okay, so the part after this should be easy, replicating the tasks in the eralier repo, where we deploy the website using ansible
-     # I just need to figure out how to save the pulic IP address and add it tothe config files. 
+      - name: Testing if it worked, hope it did
+        run:
+          cat playbook_website.yml
+
+      # Below needs to be the steps for creating the website with ansible, as seen in the otheer repo
   
