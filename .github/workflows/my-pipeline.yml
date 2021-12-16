@@ -38,16 +38,14 @@ jobs:
         run: 
           terraform output ec2_instance_ip >> new_public_ip_address
 
-      - name: Catting ip addr file
-        run:
-          cat new_public_ip_address
+      # - name: Catting ip addr file
+      #   run:
+      #     cat new_public_ip_address
 
-      - name: Catting ip addr file
+      - name: Updating inventory.hosts with new ip
         run:
-          new_ip=`cat new_public_ip_address`
+          addr=`cat new_public_ip_address` && sed "s/ip_address_goes_here/$addr/" ../../inventory.hosts > temp && mv temp inventory.hosts
 
-      - name: Echoing IP var
-        run: echo $new_ip
 
       # Since the file now contains the IP we can invoke the following command to get the address without quotes:
       # sed 's/^"//;s/.$//' new_public_ip_address
@@ -61,9 +59,9 @@ jobs:
       #   run:
       #     sed -i 's/ip_address_goes_here/`echo $new_ip`/g' inventory.hosts
 
-      # - name: Testing if it worked, hope it did
-      #   run:
-      #     cat inventory.hosts
+      - name: Testing if it worked, hope it did
+        run:
+          cat inventory.hosts
 
      # Okay, so the part after this should be easy, replicating the tasks in the eralier repo, where we deploy the website using ansible
      # I just need to figure out how to save the pulic IP address and add it tothe config files. 
